@@ -37,15 +37,9 @@ RUN set -ex && \
     apt-get autoremove -y && \
     apt-get clean
 
-
-#RUN mkdir /predict
-ENV PROG_DIR /winepredict
-COPY test.py /winepredict/
-COPY ValidationDataset.csv /winepredict/
-COPY trainingmodel.model /winepredict/
-
-ENV PROG_NAME test.py
-ADD ${PROG_NAME} .
+COPY ValidationDataset.csv .
+COPY test.py .
+COPY trainingmodel.model trainingmodel.model
 
 ENTRYPOINT ["spark-submit","test.py"]
-#CMD ["ValidationDataset.csv"]
+
